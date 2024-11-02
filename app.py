@@ -70,20 +70,7 @@ def compliance(user_id):
     
     if not user:
         return "User not found", 404
-
-    return render_template("compliance.html", user=user)  # Only pass the user data
-
-
-
-@app.route("/communication/<int:user_id>")
-def communication(user_id):
-    data = load_data()
-    user = next((u for u in data["users"] if u["id"] == user_id), None)
     
-    if not user:
-        return "User not found", 404
-    
-    print(user["communication"])
     if user["communication"] is not None:
         date = user["communication"][0]
         msg = user["communication"][1]
@@ -91,7 +78,9 @@ def communication(user_id):
         date = "" 
         msg = "No messages available."
 
-    return render_template("communication.html", user=user, communication_date=date, communication_msg=msg )
+    return render_template("compliance.html", user=user, date=date, msg=msg)  # Only pass the user data
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
