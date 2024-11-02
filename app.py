@@ -95,11 +95,15 @@ def communication(user_id):
     if not user:
         return "User not found", 404
     
-    communication_data = return_communication(user)
-    return render_template("communication.html", user=user, communication_data=communication_data)
+    print(user["communication"])
+    if user["communication"] is not None:
+        date = user["communication"][0]
+        msg = user["communication"][1]
+    else:
+        date = "" 
+        msg = "No messages available."
 
-def return_communication(user):
-    return "sample message for now. edit with real message from json later."
+    return render_template("communication.html", user=user, communication_date=date, communication_msg=msg )
 
 if __name__ == "__main__":
     app.run(debug=True)

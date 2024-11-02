@@ -17,7 +17,8 @@
             "dosage_times": ["10:00"]
           }
         ],
-        "log": []
+        "log": [],
+        "communication": ["11/02/2024, 10:30am","This is a sample comment from the json file."]
       }
     ]
   }
