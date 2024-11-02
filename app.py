@@ -28,6 +28,8 @@ def home():
     return render_template("home.html", users=data["users"])
 
 # Route to log a dose for a specific medication
+from datetime import datetime
+
 @app.route("/log_dose/<int:user_id>", methods=["GET", "POST"])
 def log_dose(user_id):
     data = load_data()
@@ -38,9 +40,16 @@ def log_dose(user_id):
 
     if request.method == "POST":
         medication_name = request.form["medication_name"]
-        dosage_time = request.form["dosage_time"]
+
+        # Check if the 'log_now' button was pressed
+        if request.form.get("action") == "log_now":
+            # Set dosage_time to current time
+            dosage_time = datetime.now().strftime("%H:%M")
+        else:
+            dosage_time = request.form["dosage_time"]
+
         taken_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        
+
         # Log the dose
         user["log"].append({
             "name": medication_name,
@@ -50,7 +59,8 @@ def log_dose(user_id):
         save_data(data)
         return redirect(url_for("home"))
     
-    return render_template("log_dose.html", user=user)
+    return render_template("log_dose.html", user=user, current_time=datetime.now().strftime("%H:%M"))
+
 
 # Route to view compliance for a user
 @app.route("/compliance/<int:user_id>")

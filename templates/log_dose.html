@@ -19,9 +19,16 @@
     <div class="medication">
         <form method="POST">
             <h3>{{ med.name }}</h3>
+            <!-- Button to submit the current time -->
+            <input type="hidden" name="dosage_time" value="{{ current_time }}">
+            <button type="submit" name="action" value="log_now">Took dosage now</button>
+            
             <label for="dosage_time">Enter Dosage Time:</label>
-            <input type="time" name="dosage_time" required>
+            
+            <input type="time" name="dosage_time">
+
             <input type="hidden" name="medication_name" value="{{ med.name }}">
+
             <button type="submit">Log Dose</button>
         </form>
     </div>
