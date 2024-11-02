@@ -7,11 +7,6 @@
 <body>
     <h1>Compliance Summary for {{ user.name }}</h1>
 
-    <!-- Compliance Stats -->
-    <p><strong>Total Scheduled Doses:</strong> {{ compliance.total }}</p>
-    <p><strong>Compliant Doses:</strong> {{ compliance.compliant }}</p>
-    <p><strong>Compliance Rate:</strong> {{ compliance.rate }}%</p>
-
     <!-- List of All Logged Doses -->
     <h2>Logged Doses</h2>
     <ul>
@@ -20,7 +15,6 @@
             <li>
                 <strong>Medication:</strong> {{ dose.name }}<br>
                 <strong>Scheduled Time:</strong> {{ dose.dosage_time }}<br>
-                <strong>Taken At:</strong> {{ dose.taken_at }}
             </li>
             {% endfor %}
         {% else %}

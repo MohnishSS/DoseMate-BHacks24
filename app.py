@@ -61,15 +61,7 @@ def compliance(user_id):
     if not user:
         return "User not found", 404
 
-    compliance_data = calculate_compliance(user)
-    return render_template("compliance.html", user=user, compliance=compliance_data)
-
-# Calculate compliance rate
-def calculate_compliance(user):
-    scheduled_doses = sum(len(med["dosage_times"]) for med in user["log"])
-    compliant_doses = len(user["log"])
-    compliance_rate = (compliant_doses / scheduled_doses * 100) if scheduled_doses > 0 else 0
-    return {"rate": compliance_rate, "total": scheduled_doses, "compliant": compliant_doses}
+    return render_template("compliance.html", user=user)  # Only pass the user data
 
 
 
