@@ -14,7 +14,7 @@
           },
           {
             "name": "Medication B",
-            "dosage_times": ["09:00", "18:00"]
+            "dosage_times": ["10:00"]
           }
         ],
         "log": []

@@ -10,14 +10,20 @@ DATA_FILE = "data.json"
 def load_data():
     try:
         with open(DATA_FILE, "r") as file:
-            return json.load(file)
+            data = json.load(file)
+            print("Data loaded:", data)  # Debugging statement
+            return data
     except FileNotFoundError:
         return {"users": []}
 
 # Save data to JSON file
 def save_data(data):
-    with open(DATA_FILE, "w") as file:
-        json.dump(data, file, indent=4)
+    try:
+        with open(DATA_FILE, "w") as file:
+            json.dump(data, file, indent=4)
+            print("Data saved successfully.")  # Debugging statement
+    except Exception as e:
+        print("Failed to save data:", e)  # Debugging statement
 
 # Home route: Display users and their medications
 @app.route("/")
@@ -44,7 +50,7 @@ def log_dose(user_id):
             med["name"] == medication_name and dosage_time in med["dosage_times"]
             for med in user["medications"]
         )
-        
+    
         if valid_medication:
             user["log"].append({
                 "name": medication_name,
