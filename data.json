@@ -23,6 +23,7 @@
                     ]
                 }
             ],
+            "communication": ["11/02/2024, 10:30am","This is a sample comment from the json file."],
             "log": [
                 {
                     "name": "Medication A (Dose 1)",
