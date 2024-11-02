@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Compliance Summary</title>
+</head>
+<body>
+    <h1>Compliance Summary for {{ user.name }}</h1>
+    <p>Total Doses: {{ compliance.total }}</p>
+    <p>Compliant Doses: {{ compliance.compliant }}</p>
+    <p>Compliance Rate: {{ compliance.rate }}%</p>
+    <a href="{{ url_for('home') }}">Back to Home</a>
+</body>
+</html>

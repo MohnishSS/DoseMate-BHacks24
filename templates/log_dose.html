@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log Dose</title>
+</head>
+<body>
+    <h1>Log Dose for {{ user.name }}</h1>
+    <form method="POST">
+        <label for="medication_name">Medication Name:</label>
+        <select name="medication_name" required>
+            {% for med in user.medications %}
+            <option value="{{ med.name }}">{{ med.name }}</option>
+            {% endfor %}
+        </select><br>
+        
+        <label for="dosage_time">Dosage Time:</label>
+        <select name="dosage_time" required>
+            {% for med in user.medications %}
+                {% for time in med.dosage_times %}
+                <option value="{{ time }}">{{ time }}</option>
+                {% endfor %}
+            {% endfor %}
+        </select><br>
+
+        <button type="submit">Log Dose</button>
+    </form>
+</body>
+</html>

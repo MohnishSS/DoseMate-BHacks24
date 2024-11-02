@@ -1,0 +1,24 @@
+{
+    "users": [
+      {
+        "id": 1,
+        "name": "John Doe",
+        "medications": [
+          {
+            "name": "Medication A (Dose 1)",
+            "dosage_times": ["10:00"]
+          },
+          {
+            "name": "Medication A (Dose 2)",
+            "dosage_times": ["08:00"]
+          },
+          {
+            "name": "Medication B",
+            "dosage_times": ["09:00", "18:00"]
+          }
+        ],
+        "log": []
+      }
+    ]
+  }
+  
