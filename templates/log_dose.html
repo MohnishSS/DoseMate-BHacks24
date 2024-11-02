@@ -5,43 +5,26 @@
     <title>Log Dose</title>
     <style>
         .medication {
-            margin: 10px 0;
-        }
-        .time-input {
-            display: none; /* Hide time input by default */
-            margin-top: 5px;
+            margin: 15px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
     </style>
-    <script>
-        function showTimeInput(medicationName) {
-            // Hide all time inputs first
-            const inputs = document.querySelectorAll('.time-input');
-            inputs.forEach(input => {
-                input.style.display = 'none';
-            });
-
-            // Show the input for the selected medication
-            const inputToShow = document.getElementById(`time-input-${medicationName}`);
-            if (inputToShow) {
-                inputToShow.style.display = 'block';
-            }
-        }
-    </script>
 </head>
 <body>
     <h1>Log Dose for {{ user.name }}</h1>
-    <form method="POST">
-        {% for med in user.medications %}
-        <div class="medication">
-            <button type="button" onclick="showTimeInput('{{ med.name }}')">{{ med.name }}</button>
-            <div class="time-input" id="time-input-{{ med.name }}">
-                <label for="dosage_time">Enter Dosage Time:</label>
-                <input type="time" name="dosage_time" required>
-                <input type="hidden" name="medication_name" value="{{ med.name }}">
-                <button type="submit">Log Dose</button>
-            </div>
-        </div>
-        {% endfor %}
-    </form>
+
+    {% for med in user.medications %}
+    <div class="medication">
+        <form method="POST">
+            <h3>{{ med.name }}</h3>
+            <label for="dosage_time">Enter Dosage Time:</label>
+            <input type="time" name="dosage_time" required>
+            <input type="hidden" name="medication_name" value="{{ med.name }}">
+            <button type="submit">Log Dose</button>
+        </form>
+    </div>
+    {% endfor %}
 </body>
 </html>

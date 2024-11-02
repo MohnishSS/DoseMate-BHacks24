@@ -1,25 +1,40 @@
 {
     "users": [
-      {
-        "id": 1,
-        "name": "John Doe",
-        "medications": [
-          {
-            "name": "Medication A (Dose 1)",
-            "dosage_times": ["10:00"]
-          },
-          {
-            "name": "Medication A (Dose 2)",
-            "dosage_times": ["08:00"]
-          },
-          {
-            "name": "Medication B",
-            "dosage_times": ["10:00"]
-          }
-        ],
-        "log": [],
-        "communication": ["11/02/2024, 10:30am","This is a sample comment from the json file."]
-      }
+        {
+            "id": 1,
+            "name": "John Doe",
+            "medications": [
+                {
+                    "name": "Medication A (Dose 1)",
+                    "dosage_times": [
+                        "10:00"
+                    ]
+                },
+                {
+                    "name": "Medication A (Dose 2)",
+                    "dosage_times": [
+                        "08:00"
+                    ]
+                },
+                {
+                    "name": "Medication B",
+                    "dosage_times": [
+                        "10:00"
+                    ]
+                }
+            ],
+            "log": [
+                {
+                    "name": "Medication A (Dose 1)",
+                    "dosage_time": "18:38",
+                    "taken_at": "2024-11-02 18:38:26"
+                },
+                {
+                    "name": "Medication A (Dose 1)",
+                    "dosage_time": "18:40",
+                    "taken_at": "2024-11-02 18:40:13"
+                }
+            ]
+        }
     ]
-  }
-  
+}

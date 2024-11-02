@@ -17,13 +17,9 @@ def load_data():
         return {"users": []}
 
 # Save data to JSON file
-def save_data(entered_data):
-    try:
-        with open(DATA_FILE, "w") as file:
-            json.dump(entered_data, file, indent=4)
-            print("Data saved successfully.")  # Debugging statement
-    except Exception as e:
-        print("Failed to save data:", e)  # Debugging statement
+def save_data(data):
+    with open(DATA_FILE, "w") as file:
+        json.dump(data, file, indent=4)
 
 # Home route: Display users and their medications
 @app.route("/")
@@ -43,27 +39,17 @@ def log_dose(user_id):
     if request.method == "POST":
         medication_name = request.form["medication_name"]
         dosage_time = request.form["dosage_time"]
+        taken_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         
-        data1={
-            "medication_name": medication_name,
-            "dosage_time":dosage_time
-        }
-        with open(DATA_FILE, "w") as file:
-            json.dump(data1, file, indent=4)
-
-        # Log the dose if it matches one of the scheduled times
-
-        # if "log" not in user:
-        #     user["log"] = []
-
-        # user["log"].append({
-        #     "name": medication_name,
-        #     "dosage_time": dosage_time,
-        # })
-        save_data(data1)
-        print("hello world")
+        # Log the dose
+        user["log"].append({
+            "name": medication_name,
+            "dosage_time": dosage_time,
+            "taken_at": taken_at
+        })
+        save_data(data)
         return redirect(url_for("home"))
-       
+    
     return render_template("log_dose.html", user=user)
 
 # Route to view compliance for a user
@@ -80,7 +66,7 @@ def compliance(user_id):
 
 # Calculate compliance rate
 def calculate_compliance(user):
-    scheduled_doses = sum(len(med["dosage_times"]) for med in user["medications"])
+    scheduled_doses = sum(len(med["dosage_times"]) for med in user["log"])
     compliant_doses = len(user["log"])
     compliance_rate = (compliant_doses / scheduled_doses * 100) if scheduled_doses > 0 else 0
     return {"rate": compliance_rate, "total": scheduled_doses, "compliant": compliant_doses}
