@@ -17,10 +17,10 @@ def load_data():
         return {"users": []}
 
 # Save data to JSON file
-def save_data(data):
+def save_data(entered_data):
     try:
         with open(DATA_FILE, "w") as file:
-            json.dump(data, file, indent=4)
+            json.dump(entered_data, file, indent=4)
             print("Data saved successfully.")  # Debugging statement
     except Exception as e:
         print("Failed to save data:", e)  # Debugging statement
@@ -43,25 +43,27 @@ def log_dose(user_id):
     if request.method == "POST":
         medication_name = request.form["medication_name"]
         dosage_time = request.form["dosage_time"]
-        taken_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         
+        data1={
+            "medication_name": medication_name,
+            "dosage_time":dosage_time
+        }
+        with open(DATA_FILE, "w") as file:
+            json.dump(data1, file, indent=4)
+
         # Log the dose if it matches one of the scheduled times
-        valid_medication = any(
-            med["name"] == medication_name and dosage_time in med["dosage_times"]
-            for med in user["medications"]
-        )
-    
-        if valid_medication:
-            user["log"].append({
-                "name": medication_name,
-                "dosage_time": dosage_time,
-                "taken_at": taken_at
-            })
-            save_data(data)
-            return redirect(url_for("home"))
-        else:
-            return "Invalid medication or dosage time", 400
-    
+
+        # if "log" not in user:
+        #     user["log"] = []
+
+        # user["log"].append({
+        #     "name": medication_name,
+        #     "dosage_time": dosage_time,
+        # })
+        save_data(data1)
+        print("hello world")
+        return redirect(url_for("home"))
+       
     return render_template("log_dose.html", user=user)
 
 # Route to view compliance for a user
