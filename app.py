@@ -83,5 +83,21 @@ def calculate_compliance(user):
     compliance_rate = (compliant_doses / scheduled_doses * 100) if scheduled_doses > 0 else 0
     return {"rate": compliance_rate, "total": scheduled_doses, "compliant": compliant_doses}
 
+
+
+@app.route("/communication/<int:user_id>")
+def communication(user_id):
+    data = load_data()
+    user = next((u for u in data["users"] if u["id"] == user_id), None)
+    
+    if not user:
+        return "User not found", 404
+    
+    communication_data = return_communication(user)
+    return render_template("communication.html", user=user, communication_data=communication_data)
+
+def return_communication(user):
+    return "sample message for now. edit with real message from json later."
+
 if __name__ == "__main__":
     app.run(debug=True)

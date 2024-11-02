@@ -11,7 +11,8 @@
         <li>
             <h2>{{ user.name }}</h2>
             <a href="{{ url_for('log_dose', user_id=user.id) }}">Log Dose</a> |
-            <a href="{{ url_for('compliance', user_id=user.id) }}">View Compliance</a>
+            <a href="{{ url_for('compliance', user_id=user.id) }}">View Compliance</a> |
+            <a href="{{ url_for('communication', user_id=user.id) }}">View Communications</a>
             <ul>
                 {% for med in user.medications %}
                 <li>{{ med.name }} - Dosage Times: {{ med.dosage_times | join(', ') }}</li>
