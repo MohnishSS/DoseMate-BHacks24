@@ -8,7 +8,7 @@
                     "name": "Medication A",
                     "dosage_times": [
                         "08:00",
-                        "10:00"
+                        "22:00"
                     ]
                 },
                 {
@@ -23,141 +23,7 @@
                 "This is a sample comment from the json file."
             ],
             "log": [
-                {
-                    "name": "Medication A",
-                    "dosage_time": "20:48",
-                    "dosage_date": "11-02-2024"
-                },
-                {
-                    "name": "Medication B",
-                    "dosage_time": "21:07",
-                    "dosage_date": "11-02-2024"
-                },
-                {
-                    "name": "Medication B",
-                    "dosage_time": "20:07",
-                    "dosage_date": "11-02-2024"
-                },
-                {
-                    "name": "Medication A",
-                    "dosage_time": "22:49",
-                    "dosage_date": "11-02-2024"
-                },
-                {
-                    "name": "Medication A",
-                    "dosage_time": "22:51",
-                    "dosage_date": "11-02-2024"
-                },
-                {
-                    "name": "Medication A",
-                    "dosage_time": "22:51",
-                    "dosage_date": "11-02-2024"
-                },
-                {
-                    "name": "Medication A",
-                    "dosage_time": "22:52",
-                    "dosage_date": "11-02-2024"
-                },
-                {
-                    "name": "Medication A",
-                    "dosage_time": "22:56",
-                    "dosage_date": "11-02-2024"
-                },
-                {
-                    "name": "Medication A",
-                    "dosage_time": "22:59",
-                    "dosage_date": "11-02-2024"
-                },
-                {
-                    "name": "Medication A",
-                    "dosage_time": "22:59",
-                    "dosage_date": "11-02-2024"
-                },
-                {
-                    "name": "Medication A",
-                    "dosage_time": "22:59",
-                    "dosage_date": "11-02-2024"
-                },
-                {
-                    "name": "Medication A",
-                    "dosage_time": "23:00",
-                    "dosage_date": "11-02-2024"
-                },
-                {
-                    "name": "Medication A",
-                    "dosage_time": "23:00",
-                    "dosage_date": "11-02-2024"
-                },
-                {
-                    "name": "Medication A",
-                    "dosage_time": "23:00",
-                    "dosage_date": "11-02-2024"
-                },
-                {
-                    "name": "Medication A",
-                    "dosage_time": "23:01",
-                    "dosage_date": "11-02-2024"
-                },
-                {
-                    "name": "Medication A",
-                    "dosage_time": "23:01",
-                    "dosage_date": "11-02-2024"
-                },
-                {
-                    "name": "Medication A",
-                    "dosage_time": "23:02",
-                    "dosage_date": "11-02-2024"
-                },
-                {
-                    "name": "Medication A",
-                    "dosage_time": "23:05",
-                    "dosage_date": "11-02-2024"
-                },
-                {
-                    "name": "Medication A",
-                    "dosage_time": "23:12",
-                    "dosage_date": "11-02-2024"
-                },
-                {
-                    "name": "Medication A",
-                    "dosage_time": "23:13",
-                    "dosage_date": "11-02-2024"
-                },
-                {
-                    "name": "Medication A",
-                    "dosage_time": "23:14",
-                    "dosage_date": "11-02-2024"
-                },
-                {
-                    "name": "Medication A",
-                    "dosage_time": "23:17",
-                    "dosage_date": "11-02-2024"
-                },
-                {
-                    "name": "Medication A",
-                    "dosage_time": "23:17",
-                    "dosage_date": "11-02-2024"
-                },
-                {
-                    "name": "Medication A",
-                    "dosage_time": "23:17",
-                    "dosage_date": "11-02-2024"
-                },
-                {
-                    "name": "Medication B",
-                    "dosage_time": "23:54",
-                    "dosage_date": "11-02-2024"
-                },
-                {
-                    "name": "Medication A",
-                    "dosage_time": "00:00",
-                    "dosage_date": "11-03-2024"
-                },
-                {
-                    "name": "Medication A",
-                    "dosage_time": "00:17",
-                    "dosage_date": "11-03-2024"
-                }
+                
             ]
         }
     ]
