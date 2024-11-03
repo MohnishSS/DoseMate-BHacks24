@@ -31,16 +31,11 @@
                 {
                     "name": "Medication A (Dose 2)",
                     "dosage_time": "20:02",
-                    "dosage_date": "11-02-2024"
+                    "dosage_date": "11-03-2024"
                 },
                 {
-                    "name": "Medication A (Dose 1)",
-                    "dosage_time": "20:34",
-                    "dosage_date": "11-02-2024"
-                },
-                {
-                    "name": "Medication A (Dose 1)",
-                    "dosage_time": "20:06",
+                    "name": "Medication A (Dose 2)",
+                    "dosage_time": "23:05",
                     "dosage_date": "11-02-2024"
                 }
             ]

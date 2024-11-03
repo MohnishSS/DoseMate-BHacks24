@@ -42,12 +42,9 @@ def log_dose(user_id):
         medication_name = request.form["medication_name"]
 
         # Check if the 'log_now' button was pressed
-        if request.form.get("action") == "log_now":
-            # Set dosage_time to current time
+        dosage_time = request.form["dosage_time"]
+        if dosage_time=="":
             dosage_time = datetime.now().strftime("%H:%M")
-        else:
-            dosage_time = request.form["dosage_time"]
-
         #taken_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         dosage_date = date.today().strftime("%m-%d-%Y")
 
