@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compliance - Medication Tracker</title>
     <style>
-        * {
+         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -110,7 +111,7 @@
             margin-bottom: 4px;
         }
         .dosage-list-container {
-            max-height: 400px; /* Adjust this value as needed */
+            max-height: 80%; /* Adjust this value as needed */
             overflow-y: auto;
             padding-right: 5px; /* Optional */
         }
@@ -119,6 +120,7 @@
 <body>
     <div class="container">
         <h1>Log Dose for {{ user.name }}</h1>
+
         <div class="dosage-list-container">
             {% for med in user.medications %}
             <div class="medication">
@@ -139,6 +141,8 @@
             </div>
             {% endfor %}
         </div>
+
+        
     </div>
     <div class="bottom-nav">
         <a href="/" class="nav-item">
@@ -155,6 +159,7 @@
         </a>
 
     </div>
+    
 
 </body>
 </html>

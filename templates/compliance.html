@@ -101,20 +101,25 @@
             overflow-y: auto;
             padding-right: 5px; /* Optional */
         }
+        .alertL{
+            min-height: 20%;
+            overflow-y: auto;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Compliance Summary for {{ user.name }}</h1>
-
-        {% if alerts %}
-            <h2>‼️ Alerts ‼️</h2>
-            <ul class="alert-list">
-                {% for alert in alerts %}
-                    <li>{{ alert }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
+        <h2>‼️ Alerts ‼️</h2>
+        <div class="alertL">
+            {% if alerts %}
+                <ul class="alert-list">
+                    {% for alert in alerts %}
+                        <li>{{ alert }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
 
         <!-- List of All Logged Doses -->
         <h2>Logged Doses</h2>
@@ -133,10 +138,13 @@
                 {% endif %}
             </ul>
 
-            <h2>Doctor's Communications</h2>
-            <p>{{ date }}: {{ msg }}</p>
 
         </div>
+        <div>
+            <h2>Doctor's Communications</h2>
+            <p>{{ date }}: {{ msg }}</p>
+        </div>
+
     </div>
     <div class="bottom-nav">
         <a href="/" class="nav-item">
