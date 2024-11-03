@@ -55,6 +55,14 @@ def log_dose(user_id):
         # Judges: We are so proud of this code! 
         # it determines whether a taken dose is late or an overdose
         
+        # Log the dose
+        user["log"].append({
+            "name": medication_name,
+            "dosage_time": dosage_time,
+            "dosage_date": dosage_date
+        })
+        save_data(data)
+
         overdoseBool=False
         dose_count=0
         maxDoses=0
@@ -87,15 +95,6 @@ def log_dose(user_id):
                 if min(mins) > 59:
                     lateBool = True
                     return redirect(url_for("explain", user_id=user_id, reason="late", med_name=medication_name))
-        
-
-        # Log the dose
-        user["log"].append({
-            "name": medication_name,
-            "dosage_time": dosage_time,
-            "dosage_date": dosage_date
-        })
-        save_data(data)
         
         
         if not overdoseBool and not lateBool:
