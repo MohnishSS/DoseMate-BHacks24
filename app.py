@@ -15,7 +15,6 @@ def load_data():
     try:
         with open(DATA_FILE, "r") as file:
             data = json.load(file)
-            #print("Data loaded:", data)  # Debugging statement
             return data
     except FileNotFoundError:
         return {"users": []}
@@ -44,7 +43,6 @@ def home():
         
         string += f" Dosage times: {', '.join(formatted_times)}\n"
         
-        print(string)
         data["users"][0]["medications"][medication]["dosage_times"] = string
     return render_template("home.html", users=data["users"])
 
@@ -69,9 +67,6 @@ def log_dose(user_id):
         #taken_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         dosage_date = date.today().strftime("%m-%d-%Y")
 
-        # Judges: We are so proud of this code! 
-        # it determines whether a taken dose is late or an overdose
-        
         # Log the dose
         user["log"].append({
             "name": medication_name,
@@ -80,35 +75,31 @@ def log_dose(user_id):
         })
         save_data(data)
 
+
+        # checking for overdoses
         overdoseBool=False
         dose_count=0
         maxDoses=0
-        print("MED NAME = ", medication_name)
         for med in user["medications"]:
-            print(med)
             if med["name"]==medication_name:
                 maxDoses=len(med["dosage_times"])
-                print("MAXDOSES = ", maxDoses)
                 break
         for dose in user["log"]:
             if dose['name']==medication_name:
                 dose_count+=1
-        print("DOSECOUNT = ", dose_count)
         if dose_count>maxDoses:
             overdoseBool=True
-            print("NOW ITS AN OVERDOSE")
             return redirect(url_for("explain", user_id=user_id, reason="overdose", med_name = medication_name))
         
+        # checking for late dose
         lateBool = False
-        dosage_timeInMin = int(dosage_time[:2])*60 + int(dosage_time[3:])
+        dosage_timeInMin = int(dosage_time[:2])*60 + int(dosage_time[3:]) # i am so proud of this formula -Felix :)
         for i in user["medications"]:
             if i["name"] == medication_name:
                 mins = []
                 for j in i["dosage_times"]:
                     distExpectedAndReal = abs(int(j[:2])*60 + int(j[3:])- dosage_timeInMin)
-                    #print("THIS IS THE VALUE: !!!!!!!!! ", distExpectedAndReal)
                     mins.append(distExpectedAndReal)
-                    #print(min(mins))
                 if min(mins) > 59:
                     lateBool = True
                     return redirect(url_for("explain", user_id=user_id, reason="late", med_name=medication_name))
@@ -129,6 +120,11 @@ def compliance(user_id):
     if not user:
         return "User not found", 404
 
+    # this part is mostly placeholder. since DoseMate is 'linked' to the patient connect,
+    # doctors could give advice to their patients remotely through this part of the app.
+    # the user["communication"] field is static in this demo, but could be easily updated
+    # if the integration existed. 
+
     if user["communication"] is not None:
         date = user["communication"][0]
         msg = user["communication"][1]
@@ -141,11 +137,13 @@ def compliance(user_id):
 @app.route("/explain/<int:user_id>/<reason>/<med_name>", methods=["GET", "POST"])
 def explain(user_id, reason, med_name):
     data = load_data()
+    # giving the user the opportunity to explain their non-adherence.
     if reason=="late":
         alert_message=f"You took {med_name} on the wrong time. We are sending an alert to your emergency contact and your doctor."
     elif reason=="overdose":
         alert_message=f"You took {med_name} more than you were supposed to today. We are sending an alert to your emergency contact and your doctor."
     
+    # sending the message to the family member.
     if request.method == "POST":
         reason_message = request.form["message"]
         if reason=="overdose":
@@ -156,6 +154,12 @@ def explain(user_id, reason, med_name):
             client.messages.create(body=f"This is a notification to inform you that your loved one has not been following their prescription routine given by their primary care provider. Please get in touch with them. Alert: Missed the schedule for {med_name}. Here is what he said: {reason_message}",
                         from_=send_mechanic.from_whatsapp_number,
                         to=send_mechanic.to_whatsapp_number)
+
+    # a similar message could be sent to doctors/medical professionals.
+    # we work under the assumption that DoseMate is linked to Patient Connect
+    # and therefore these communication channels already exist and are easily
+    # callable and editable.
+
         return redirect(url_for("home"))
     return render_template("explain.html", users=data["users"], alert=alert_message)
 
