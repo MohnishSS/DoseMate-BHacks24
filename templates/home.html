@@ -2,23 +2,192 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medication Tracker</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+        body {
+            background-color: hsl(220, 60%, 97%);
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            width: 85%;
+            height: 85%;
+            border-radius: 30px;
+            background-color: #fff;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: left;
+        }
+        .date {
+            color: #b0b0b0;
+            font-size: 14px;
+        }
+        .welcome-text {
+            font-size: 24px;
+            margin: 4px 0;
+            font-weight: 600;
+        }
+        .section-title {
+            font-size: 18px;
+            margin: 24px 0 8px;
+            font-weight: 600;
+        }
+        .dosage-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .dosage-item {
+            display: flex;
+            align-items: center;
+            background-color: #f5f5f5;
+            border-radius: 16px;
+            padding: 12px;
+            cursor: pointer;
+        }
+        .dosage-icon {
+            background-color: #9fc1ff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 12px;
+        }
+        .dosage-info {
+            flex: 1;
+        }
+        .dosage-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .dosage-subtitle {
+            color: #a0a0a0;
+            font-size: 12px;
+        }
+        .dosage-time {
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        /* Modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        .close-button {
+            background-color: #ff5e5e;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            padding: 5px 10px;
+            cursor: pointer;
+            float: right;
+        }
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        .modal-subtitle, .modal-time {
+            font-size: 14px;
+            margin: 6px 0;
+        }
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            background-color: white;
+            border-radius: 20px 20px 0 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 360px;
+        }
+        .nav-item {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+        }
+        .nav-icon {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Medication Compliance Tracker</h1>
-    <ul>
+    <div class="container">
         {% for user in users %}
-        <li>
-            <h2>{{ user.name }}</h2>
-            <a href="{{ url_for('log_dose', user_id=user.id) }}">Log Dose</a> |
-            <a href="{{ url_for('compliance', user_id=user.id) }}">View Compliance</a>
-            <ul>
+        <div class="header">
+            <div class="date"></div>
+            <div class="welcome-text">Welcome Back {{ user.name }}!</div>
+        </div>
+        
+
+        <div class="section-title">
+            Prescribed Dosages
+            <span style="font-size: 14px; color: #8a8aff; float: right; cursor: pointer;">View All</span>
+        </div>
+        
+        <div class="user">
+            <div class="dosage-list">
                 {% for med in user.medications %}
-                <li>{{ med.name }} - Dosage Times: {{ med.dosage_times | join(', ') }}</li>
+                <div class="dosage-item">
+                    <div class="dosage-icon"></div>
+                    <div class="dosage-info">
+                        <div class="dosage-title">{{ med.name }}</div>
+                        <div class="dosage-subtitle">{{med.dosage_quantity}}</div>
+                        <div class="dosage-time">{{ med.dosage_times }}</div>
+                    </div>
+                </div>
                 {% endfor %}
-            </ul>
-        </li>
+            </div>
+        </div>
         {% endfor %}
-    </ul>
+    </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-nav">
+        <div class="nav-item">
+            <div class="nav-icon">🏠</div>
+            Home
+        </div>
+        <div class="nav-item">
+            <div class="nav-icon">💬</div>
+            Message
+        </div>
+        <div class="nav-item">
+            <div class="nav-icon">📅</div>
+            Calendar
+        </div>
+    </div>
 </body>
+
 </html>
+
