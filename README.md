@@ -1,7 +1,10 @@
 # DoseMate-BHacks24
 For Boston Hacks 2024.
+
 Track: Reimagine Reality.
+
 Prize: Patient Safety Technology Challenge. 
+
 By Felix Bagurskas Rubio, Mohnish Shridhar, Rohan Chablani and Jay Patel. 
 
 ## What is DoseMate?
