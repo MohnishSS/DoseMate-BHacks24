@@ -76,7 +76,7 @@ def compliance(user_id):
         date = user["communication"][0]
         msg = user["communication"][1]
     else:
-        date = "" 
+        date = date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")  
         msg = "No messages available."
 
     return render_template("compliance.html", user=user, date=date, msg=msg)  # Only pass the user data
