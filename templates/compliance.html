@@ -2,38 +2,157 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compliance Summary</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+        body {
+            background-color: hsl(220, 60%, 97%);
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 85%;
+            height: 85%;
+            border-radius: 30px;
+            background-color: #fff;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 16px;
+        }
+        h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #555;
+            margin: 24px 0 12px;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        li {
+            background-color: #f5f5f5;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        li strong {
+            font-weight: 600;
+            color: #333;
+        }
+        p {
+            color: #777;
+            margin: 8px 0;
+            font-size: 14px;
+        }
+        a {
+            display: inline-block;
+            text-decoration: none;
+            color: #8a8aff;
+            font-weight: 600;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .alert-list li {
+            background-color: #ffefef;
+            color: #d9534f;
+        }
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            background-color: white;
+            border-radius: 20px 20px 0 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 360px;
+        }
+        .nav-item {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+        }
+        .nav-icon {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+        .dosage-list-container {
+            max-height: 400px; /* Adjust this value as needed */
+            overflow-y: auto;
+            padding-right: 5px; /* Optional */
+        }
+    </style>
 </head>
 <body>
-    <h1>Compliance Summary for {{ user.name }}</h1>
+    <div class="container">
+        <h1>Compliance Summary for {{ user.name }}</h1>
 
-    {% if alerts %}
-        <h2>Alerts</h2>
-        <ul>
-            {% for alert in alerts %}
-                <li>{{ alert }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-    
-    <!-- List of All Logged Doses -->
-    <h2>Logged Doses</h2>
-    <ul>
-        {% if user.log %}
-            {% for dose in user.log %}
-            <li>
-                <strong>Medication:</strong> {{ dose.name }}<br>
-                <strong>Took at:</strong> {{ dose.dosage_time }}<br>
-                <strong>On:</strong> {{ dose.dosage_date }}<br>
-            </li>
-            {% endfor %}
-        {% else %}
-            <p>No doses logged yet.</p>
+        {% if alerts %}
+            <h2>‼️ Alerts ‼️</h2>
+            <ul class="alert-list">
+                {% for alert in alerts %}
+                    <li>{{ alert }}</li>
+                {% endfor %}
+            </ul>
         {% endif %}
-    </ul>
-    <h2>Doctor's Communications</h2>
-    <p> {{date }}: {{msg }}</p>
 
-    <a href="{{ url_for('home') }}">Back to Home</a>
+        <!-- List of All Logged Doses -->
+        <h2>Logged Doses</h2>
+        <div class="dosage-list-container">
+            <ul>
+                {% if user.log %}
+                    {% for dose in user.log %}
+                    <li>
+                        <strong>Medication:</strong> {{ dose.name }}<br>
+                        <strong>Took at:</strong> {{ dose.dosage_time }}<br>
+                        <strong>On:</strong> {{ dose.dosage_date }}
+                    </li>
+                    {% endfor %}
+                {% else %}
+                    <p>No doses logged yet.</p>
+                {% endif %}
+            </ul>
+
+            <h2>Doctor's Communications</h2>
+            <p>{{ date }}: {{ msg }}</p>
+
+        </div>
+    </div>
+    <div class="bottom-nav">
+        <a href="/" class="nav-item">
+            <div class="nav-icon">🏠</div>
+            <div>Home</div>
+        </a>
+        <a href="/log_dose/1" class="nav-item">
+            <div class="nav-icon">📃</div>
+            <div>Log Dose</div>
+        </a>
+        <a href="/compliance/1" class="nav-item">
+            <div class="nav-icon">✔️</div>
+            <div>Compliance</div>
+        </a>
+        
+    </div>
 </body>
 </html>
+
