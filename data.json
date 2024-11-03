@@ -5,45 +5,16 @@
             "name": "John Doe",
             "medications": [
                 {
-                    "name": "Medication A (Dose 1)",
+                    "name": "Medication A",
                     "dosage_times": [
+                        "08:00",
                         "10:00"
-                    ]
-                },
-                {
-                    "name": "Medication A (Dose 2)",
-                    "dosage_times": [
-                        "08:00"
                     ]
                 },
                 {
                     "name": "Medication B",
                     "dosage_times": [
                         "10:00"
-                    ]
-                },
-                {
-                    "name": "Medication C",
-                    "dosage_times": [
-                        "01:00"
-                    ]
-                },
-                {
-                    "name": "Medication D",
-                    "dosage_times": [
-                        "18:00"
-                    ]
-                },
-                {
-                    "name": "Medication E",
-                    "dosage_times": [
-                        "01:00"
-                    ]
-                },
-                {
-                    "name": "Medication F",
-                    "dosage_times": [
-                        "02:00"
                     ]
                 }
             ],
@@ -53,33 +24,13 @@
             ],
             "log": [
                 {
-                    "name": "Medication A (Dose 2)",
-                    "dosage_time": "20:02",
-                    "dosage_date": "11-03-2024"
-                },
-                {
-                    "name": "Medication A (Dose 2)",
-                    "dosage_time": "23:05",
+                    "name": "Medication A",
+                    "dosage_time": "20:48",
                     "dosage_date": "11-02-2024"
                 },
                 {
-                    "name": "Medication A (Dose 1)",
-                    "dosage_time": "10:30",
-                    "dosage_date": "11-02-2024"
-                },
-                {
-                    "name": "Medication A (Dose 1)",
-                    "dosage_time": "21:46",
-                    "dosage_date": "11-02-2024"
-                },
-                {
-                    "name": "Medication D",
-                    "dosage_time": "23:15",
-                    "dosage_date": "11-02-2024"
-                },
-                {
-                    "name": "Medication A (Dose 1)",
-                    "dosage_time": "22:14",
+                    "name": "Medication B",
+                    "dosage_time": "21:07",
                     "dosage_date": "11-02-2024"
                 }
             ]
