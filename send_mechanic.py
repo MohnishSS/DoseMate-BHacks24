@@ -22,6 +22,6 @@ to_whatsapp_number = 'whatsapp:+15088166235'
 
 
 # this call will send a message
-client.messages.create(body='This is a notification to inform you that you loved on <name of patient> has not been following their prescription routine given by their primary care provider. Please get in touch with <name of patient>.',
-                     from_=from_whatsapp_number,
-                     to=to_whatsapp_number)
+# client.messages.create(body='This is a notification to inform you that you loved on <name of patient> has not been following their prescription routine given by their primary care provider. Please get in touch with <name of patient>.',
+#                      from_=from_whatsapp_number,
+#                      to=to_whatsapp_number)
