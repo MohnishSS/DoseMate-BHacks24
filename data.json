@@ -23,7 +23,11 @@
                 "This is a sample comment from the json file."
             ],
             "log": [
-                
+                {
+                    "name": "Medication A",
+                    "dosage_time": "01:49",
+                    "dosage_date": "11-03-2024"
+                }
             ]
         }
     ]

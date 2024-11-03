@@ -29,6 +29,23 @@ def save_data(data):
 @app.route("/")
 def home():
     data = load_data()
+    data1 = data["users"][0]["medications"].copy()
+    for medication in range(len(data1)):
+        # Assuming each medication has a 'name' attribute
+        string = ""
+        
+        # Convert each time in 'dosage_times' to 12-hour format and store in list
+        formatted_times = []
+        for dosage_time in range(len(data1[medication]["dosage_times"])):
+            hour, minute = map(int, data1[medication]["dosage_times"][dosage_time].split(':'))
+            period = 'AM' if hour < 12 else 'PM'
+            hour = hour % 12 or 12  # Convert hour to 12-hour format
+            formatted_times.append(f"{hour}:{minute:02d} {period}")
+        
+        string += f" Dosage times: {', '.join(formatted_times)}\n"
+        
+        print(string)
+        data["users"][0]["medications"][medication]["dosage_times"] = string
     return render_template("home.html", users=data["users"])
 
 # Route to log a dose for a specific medication
