@@ -37,6 +37,11 @@
                     "name": "Medication A (Dose 1)",
                     "dosage_time": "20:34",
                     "dosage_date": "11-02-2024"
+                },
+                {
+                    "name": "Medication A (Dose 1)",
+                    "dosage_time": "20:06",
+                    "dosage_date": "11-02-2024"
                 }
             ]
         }
