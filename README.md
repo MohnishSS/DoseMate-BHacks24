@@ -16,4 +16,13 @@ The objective of DoseMate is to **increase patient safety** by keeping patients 
 ## Installation Guide
 Make sure the project dependencies are installed: `pip install flask`, `pip install twilio`. You may need to make a [Python virutal environment](https://docs.python.org/3/library/venv.html)--follow the linked tutorial.
 
-Once set up, run `python app.py`.
+Once set up, you must provide a `send_mechanic.py` file. It has the following structure:
+```python
+account_sid = '' # add twillio account sid.
+auth_token = '' # add auth token.
+from_whatsapp_number = 'whatsapp:+' # add twilio phone number after the +
+to_whatsapp_number = 'whatsapp:+' # add patient (recipient) phone number after the +.
+```
+
+
+Finally, run `python app.py`.
