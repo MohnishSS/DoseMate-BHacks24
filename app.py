@@ -69,6 +69,24 @@ def compliance(user_id):
     if not user:
         return "User not found", 404
     
+    alerts = []
+    medication_count = {}
+    
+    for dose in user["log"]:
+        print(f"{dose['name']}_{dose['dosage_date']}")
+        date_key = f"{dose['name']}_{dose['dosage_date']}"
+        if date_key in medication_count:
+            medication_count[date_key] += 1
+        else:
+            medication_count[date_key] = 1
+            
+    for med_date, count in medication_count.items():
+        if count > 1:
+            medication_name, dosage_date = med_date.split('_')
+            alerts.append(f"Alert: Multiple doses of {medication_name} logged on {dosage_date}. Total: {count}.")
+        print(alerts)
+
+    
     if user["communication"] is not None:
         date = user["communication"][0]
         msg = user["communication"][1]
@@ -76,7 +94,7 @@ def compliance(user_id):
         date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")  
         msg = "No messages available."
 
-    return render_template("compliance.html", user=user, date=date, msg=msg)  # Only pass the user data
+    return render_template("compliance.html", user=user, alerts=alerts, date=date, msg=msg)  # Only pass the user data
 
 
 
