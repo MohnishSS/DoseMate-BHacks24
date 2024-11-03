@@ -7,6 +7,15 @@
 <body>
     <h1>Compliance Summary for {{ user.name }}</h1>
 
+    {% if alerts %}
+        <h2>Alerts</h2>
+        <ul>
+            {% for alert in alerts %}
+                <li>{{ alert }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    
     <!-- List of All Logged Doses -->
     <h2>Logged Doses</h2>
     <ul>
