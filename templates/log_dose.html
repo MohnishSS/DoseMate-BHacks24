@@ -24,9 +24,10 @@
             <button type="submit" name="action" value="log_now">Took dosage now</button>
             
             <input type="hidden" name="medication_name" value="{{ med.name }}">
+            <p></p>
             <input type="hidden" name="dosage_date" value="{{ current_date }}">
 
-            <label for="dosage_time">Enter Dosage Time:</label>
+            <label for="dosage_time">Or enter dosage time:</label>
             <input type="time" name="dosage_time">
 
             <button type="submit">Log Dose</button>
