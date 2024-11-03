@@ -17,7 +17,7 @@ client = Client(account_sid, auth_token)
 from_whatsapp_number = 'whatsapp:+14155238886'
 
 
-# the recieving side phone number
+# the receiving side phone number
 to_whatsapp_number = 'whatsapp:+15088166235'
 
 
