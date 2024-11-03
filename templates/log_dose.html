@@ -19,6 +19,9 @@
             margin: 0;
         }
         .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             width: 85%;
             height: 85%;
             border-radius: 30px;
@@ -106,45 +109,52 @@
             font-size: 18px;
             margin-bottom: 4px;
         }
+        .dosage-list-container {
+            max-height: 400px; /* Adjust this value as needed */
+            overflow-y: auto;
+            padding-right: 5px; /* Optional */
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Compliance Log for {{ user.name }}</h1>
-        {% for med in user.medications %}
-        <div class="medication">
-            <h3>{{ med.name }}</h3>
-            <form method="POST">
-                <input type="hidden" name="medication_name" value="{{ med.name }}">
-                <input type="hidden" name="dosage_date" value="{{ current_date }}">
-                
-                <div class="button-container">
-                    <button type="submit" name="action" value="log_now">Took dosage now</button>
-                    <div>
-                        <label for="dosage_time">Or enter dosage time:</label>
-                        <input type="time" name="dosage_time">
+        <h1>Log Dose for {{ user.name }}</h1>
+        <div class="dosage-list-container">
+            {% for med in user.medications %}
+            <div class="medication">
+                <h3>{{ med.name }}</h3>
+                <form method="POST">
+                    <input type="hidden" name="medication_name" value="{{ med.name }}">
+                    <input type="hidden" name="dosage_date" value="{{ current_date }}">
+                    
+                    <div class="button-container">
+                        <button type="submit" name="action" value="log_now">Took dosage now</button>
+                        <div>
+                            <label for="dosage_time">Or enter dosage time:</label>
+                            <input type="time" name="dosage_time">
+                        </div>
+                        <button type="submit" name="action" value="log_later">Log Dose</button>
                     </div>
-                    <button type="submit" name="action" value="log_later">Log Dose</button>
-                </div>
-            </form>
+                </form>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
-        <div class="bottom-nav">
-            <a href="/" class="nav-item">
-                <div class="nav-icon">🏠</div>
-                <div>Home</div>
-            </a>
-            <a href="/log_dose/1" class="nav-item">
-                <div class="nav-icon">📃</div>
-                <div>Log Dose</div>
-            </a>
-            <a href="/compliance/1" class="nav-item">
-                <div class="nav-icon">✔️</div>
-                <div>Compliance</div>
-            </a>
+    <div class="bottom-nav">
+        <a href="/" class="nav-item">
+            <div class="nav-icon">🏠</div>
+            <div>Home</div>
+        </a>
+        <a href="/log_dose/1" class="nav-item">
+            <div class="nav-icon">📃</div>
+            <div>Log Dose</div>
+        </a>
+        <a href="/compliance/1" class="nav-item">
+            <div class="nav-icon">✔️</div>
+            <div>Compliance</div>
+        </a>
 
-        </div>
     </div>
+
 </body>
 </html>

@@ -20,6 +20,9 @@
             margin: 0;
         }
         .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             width: 85%;
             height: 85%;
             border-radius: 30px;
@@ -101,6 +104,11 @@
             font-size: 18px;
             margin-bottom: 4px;
         }
+        .dosage-list-container {
+            max-height: 400px; /* Adjust this value as needed */
+            overflow-y: auto;
+            padding-right: 5px; /* Optional */
+        }
     </style>
 </head>
 <body>
@@ -118,18 +126,20 @@
         </div>
         
         <div class="user">
-            <div class="dosage-list">
-                {% for med in user.medications %}
-                <div class="dosage-item">
-                    <div class="dosage-icon"></div>
-                    <div class="dosage-info">
-                        <div class="dosage-title">{{ med.name }}</div>
-                        <div class="dosage-subtitle">{{med.dosage_quantity}}</div>
-                        <div class="dosage-time">{{ med.dosage_times }}</div>
+            <div class="dosage-list-container">
+                <div class="dosage-list">
+                    {% for med in user.medications %}
+                    <div class="dosage-item">
+                        <div class="dosage-icon"></div>
+                        <div class="dosage-info">
+                            <div class="dosage-title">{{ med.name }}</div>
+                            <div class="dosage-subtitle">{{ med.dosage_quantity }}</div>
+                            <div class="dosage-time">{{ med.dosage_times }}</div>
+                        </div>
                     </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
-            </div>
+            </div>            
         </div>
         {% endfor %}
     </div>
