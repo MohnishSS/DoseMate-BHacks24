@@ -52,6 +52,21 @@ def log_dose(user_id):
         #taken_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         dosage_date = date.today().strftime("%m-%d-%Y")
 
+        # Judges: We are so proud of this code! 
+        # it determines whether a taken dose is late
+        lateBool = False
+        dosage_timeInMin = int(dosage_time[:2])*60 + int(dosage_time[3:])
+        for i in user["medications"]:
+            if i["name"] == medication_name:
+                for j in i["dosage_times"]:
+                    mins = []
+                    distExpectedAndReal = abs(int(j[:2])*60 + int(j[3:])- dosage_timeInMin)
+                    mins.append(distExpectedAndReal)
+                if min(distExpectedAndReal) > 59:
+                    lateBool = True
+        
+        print(lateBool)
+
         # Log the dose
         user["log"].append({
             "name": medication_name,
@@ -59,7 +74,11 @@ def log_dose(user_id):
             "dosage_date": dosage_date
         })
         save_data(data)
-        return redirect(url_for("home"))
+        
+        if lateBool:
+            return redirect(url_for("explain"))
+        else:
+            return redirect(url_for("home"))
     
     return render_template("log_dose.html", user=user, current_time=datetime.now().strftime("%H:%M"))
 
@@ -89,8 +108,8 @@ def compliance(user_id):
             medication_name, dosage_date = med_date.split('_')
             alerts.append(f"Alert: Multiple doses of {medication_name} logged on {dosage_date}. Total: {count}.")
             client.messages.create(body=f"This is a notification to inform you that your loved one ___ has not been following their prescription routine given by their primary care provider. Please get in touch with them. Alert: Multiple doses of {medication_name} logged on {dosage_date}. Total: {count}.",
-                     from_=send_mechanic.from_whatsapp_number,
-                     to=send_mechanic.to_whatsapp_number)
+                from_=send_mechanic.from_whatsapp_number,
+                to=send_mechanic.to_whatsapp_number)
     
 
     
