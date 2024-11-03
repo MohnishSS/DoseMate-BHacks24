@@ -1,5 +1,5 @@
 import json
-from datetime import datetime
+from datetime import datetime, date
 from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
@@ -48,13 +48,14 @@ def log_dose(user_id):
         else:
             dosage_time = request.form["dosage_time"]
 
-        taken_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        #taken_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        dosage_date = date.today().strftime("%m-%d-%Y")
 
         # Log the dose
         user["log"].append({
             "name": medication_name,
             "dosage_time": dosage_time,
-            "taken_at": taken_at
+            "dosage_date": dosage_date
         })
         save_data(data)
         return redirect(url_for("home"))

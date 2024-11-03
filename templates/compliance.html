@@ -14,7 +14,8 @@
             {% for dose in user.log %}
             <li>
                 <strong>Medication:</strong> {{ dose.name }}<br>
-                <strong>Scheduled Time:</strong> {{ dose.dosage_time }}<br>
+                <strong>Took at:</strong> {{ dose.dosage_time }}<br>
+                <strong>On:</strong> {{ dose.dosage_date }}<br>
             </li>
             {% endfor %}
         {% else %}

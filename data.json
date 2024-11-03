@@ -29,29 +29,9 @@
             ],
             "log": [
                 {
-                    "name": "Medication A (Dose 1)",
-                    "dosage_time": "18:38",
-                    "taken_at": "2024-11-02 18:38:26"
-                },
-                {
-                    "name": "Medication A (Dose 1)",
-                    "dosage_time": "18:40",
-                    "taken_at": "2024-11-02 18:40:13"
-                },
-                {
-                    "name": "Medication A (Dose 1)",
-                    "dosage_time": "18:48",
-                    "taken_at": "2024-11-02 18:48:48"
-                },
-                {
-                    "name": "Medication A (Dose 1)",
-                    "dosage_time": "19:49",
-                    "taken_at": "2024-11-02 19:49:32"
-                },
-                {
                     "name": "Medication A (Dose 2)",
-                    "dosage_time": "19:50",
-                    "taken_at": "2024-11-02 19:50:09"
+                    "dosage_time": "20:02",
+                    "dosage_date": "11-02-2024"
                 }
             ]
         }
