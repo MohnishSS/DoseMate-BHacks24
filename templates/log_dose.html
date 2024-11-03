@@ -2,37 +2,149 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Log Dose</title>
+    <title>Compliance - Medication Tracker</title>
     <style>
-        .medication {
-            margin: 15px 0;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+        body {
+            background-color: hsl(220, 60%, 97%);
+            display: flex;
+            justify-content: center;
             padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            width: 85%;
+            height: 85%;
+            border-radius: 30px;
+            background-color: #fff;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .medication {
+            margin-bottom: 15px;
+            padding: 16px;
+            background-color: #f9f9f9;
+            border-radius: 12px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .medication h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        label {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 4px;
+        }
+        input[type="time"] {
+            padding: 8px;
+            font-size: 14px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            width: 100%;
+        }
+        .button-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        button {
+            padding: 8px 16px;
+            font-size: 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        button[type="submit"]:first-child {
+            background-color: #8a8aff;
+        }
+        button[type="submit"]:first-child:hover {
+            background-color: #6f6fd4;
+        }
+        button[type="submit"]:last-child {
+            background-color: #ff8a8a;
+        }
+        button[type="submit"]:last-child:hover {
+            background-color: #e66e6e;
+        }
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            background-color: white;
+            border-radius: 20px 20px 0 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 360px;
+        }
+        .nav-item {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+        }
+        .nav-icon {
+            font-size: 18px;
+            margin-bottom: 4px;
         }
     </style>
 </head>
 <body>
-    <h1>Log Dose for {{ user.name }}</h1>
-
-    {% for med in user.medications %}
-    <div class="medication">
-        <form method="POST">
+    <div class="container">
+        <h1>Compliance Log for {{ user.name }}</h1>
+        {% for med in user.medications %}
+        <div class="medication">
             <h3>{{ med.name }}</h3>
-            <!-- Button to submit the current time -->
-            
-            <button type="submit" name="action" value="log_now">Took dosage now</button>
-            
-            <input type="hidden" name="medication_name" value="{{ med.name }}">
-            <p></p>
-            <input type="hidden" name="dosage_date" value="{{ current_date }}">
-
-            <label for="dosage_time">Or enter dosage time:</label>
-            <input type="time" name="dosage_time">
-
-            <button type="submit" name="action" value="log_later">Log Dose</button>
-        </form>
+            <form method="POST">
+                <input type="hidden" name="medication_name" value="{{ med.name }}">
+                <input type="hidden" name="dosage_date" value="{{ current_date }}">
+                
+                <div class="button-container">
+                    <button type="submit" name="action" value="log_now">Took dosage now</button>
+                    <div>
+                        <label for="dosage_time">Or enter dosage time:</label>
+                        <input type="time" name="dosage_time">
+                    </div>
+                    <button type="submit" name="action" value="log_later">Log Dose</button>
+                </div>
+            </form>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
+        <div class="bottom-nav">
+            <a href="/" class="nav-item">
+                <div class="nav-icon">🏠</div>
+                <div>Home</div>
+            </a>
+            <a href="/log_dose/1" class="nav-item">
+                <div class="nav-icon">📃</div>
+                <div>Log Dose</div>
+            </a>
+            <a href="/compliance/1" class="nav-item">
+                <div class="nav-icon">✔️</div>
+                <div>Compliance</div>
+            </a>
+
+        </div>
+    </div>
 </body>
 </html>
