@@ -1,6 +1,6 @@
 import json
-#import send_mechanic
-#from twilio.rest import Client
+import send_mechanic
+from twilio.rest import Client
 from datetime import datetime, date
 from flask import Flask, render_template, request, redirect, url_for
 
@@ -76,7 +76,7 @@ def log_dose(user_id):
         save_data(data)
         
         if lateBool:
-            return redirect(url_for("explain", user_id=user_id))
+            return redirect(url_for("explain", user_id=user_id, reason="late", med_name = medication_name))
         else:
             return redirect(url_for("home"))
     
@@ -96,7 +96,7 @@ def compliance(user_id):
     medication_count = {}
     
     for dose in user["log"]:
-        print(f"{dose['name']}_{dose['dosage_date']}")
+        #print(f"{dose['name']}_{dose['dosage_date']}")
         date_key = f"{dose['name']}_{dose['dosage_date']}"
         if date_key in medication_count:
             medication_count[date_key] += 1
@@ -107,9 +107,10 @@ def compliance(user_id):
         if count > 1:
             medication_name, dosage_date = med_date.split('_')
             alerts.append(f"Alert: Multiple doses of {medication_name} logged on {dosage_date}. Total: {count}.")
-            #client.messages.create(body=f"This is a notification to inform you that your loved one ___ has not been following their prescription routine given by their primary care provider. Please get in touch with them. Alert: Multiple doses of {medication_name} logged on {dosage_date}. Total: {count}.",
-            #        from_=send_mechanic.from_whatsapp_number,
-            #        to=send_mechanic.to_whatsapp_number)
+            # client.messages.create(body=f"This is a notification to inform you that your loved one ___ has not been following their prescription routine given by their primary care provider. Please get in touch with them. Alert: Multiple doses of {medication_name} logged on {dosage_date}. Total: {count}.",
+            #         from_=send_mechanic.from_whatsapp_number,
+            #         to=send_mechanic.to_whatsapp_number)
+            
     
 
     
@@ -122,10 +123,12 @@ def compliance(user_id):
 
     return render_template("compliance.html", user=user, alerts=alerts, date=date, msg=msg)  # Only pass the user data
 
-@app.route("/explain/<int:user_id>")
-def explain(user_id):
+@app.route("/explain/<int:user_id>/<reason>/<med_name>")
+def explain(user_id, reason, med_name):
     data = load_data()
-    return render_template("explain.html", users=data["users"])
+    if reason=="late":
+        alert_message=f"You took {med_name} on the wrong time. We are sending an alert to your emergency contact and your doctor."
+    return render_template("explain.html", users=data["users"], alert=alert_message)
 
 if __name__ == "__main__":
     app.run(debug=True)

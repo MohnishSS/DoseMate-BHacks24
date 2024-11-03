@@ -113,54 +113,10 @@
 </head>
 <body>
     <div class="container">
-        {% for user in users %}
-        <div class="header">
-            <div class="date"></div>
-            <div class="welcome-text">Welcome Back {{ user.name }}!</div>
-        </div>
-        
-
-        <div class="section-title">
-            Prescribed Dosages
-            <span style="font-size: 14px; color: #8a8aff; float: right; cursor: pointer;">View All</span>
-        </div>
-        
-        <div class="user">
-            <div class="dosage-list-container">
-                <div class="dosage-list">
-                    {% for med in user.medications %}
-                    <div class="dosage-item">
-                        <div class="dosage-icon"></div>
-                        <div class="dosage-info">
-                            <div class="dosage-title">{{ med.name }}</div>
-                            <div class="dosage-subtitle">{{ med.dosage_quantity }}</div>
-                            <div class="dosage-time">{{ med.dosage_times }}</div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>            
-        </div>
-        {% endfor %}
-    </div>
-            </div>
-        </div>
-    </div>
-    <div class="bottom-nav">
-        <a href="/" class="nav-item">
-            <div class="nav-icon">🏠</div>
-            <div>Home</div>
-        </a>
-        <a href="/log_dose/1" class="nav-item">
-            <div class="nav-icon">📃</div>
-            <div>Log Dose</div>
-        </a>
-        <a href="/compliance/1" class="nav-item">
-            <div class="nav-icon">✔️</div>
-            <div>Compliance</div>
-        </a>
-        
-    </div>
+        <h2>‼️ Alerts ‼️</h2>
+        <ul class="alert-list">
+            <li>{{ alert }}</li>
+        </ul>
     </div>
 </body>
 
